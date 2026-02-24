@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos Co. Barrio Ruta del Sol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-1: #FF6B6B;
+            --color-2: #4ECDC4;
+            --color-3: #FFE66D;
+            --color-4: #A8E6CF;
+            --bg-main: #FAFBFC;
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            --precursor: #667EEA;
+            --sup: #F56565;
+            --aux: #48BB78;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+            color: white;
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .legend {
+            background: white;
+            padding: 16px 20px;
+            margin: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .legend-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 0 16px 24px;
+        }
+
+        .group-card {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .group-header {
+            padding: 16px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid;
+        }
+
+        .group-1 .group-header { 
+            background: linear-gradient(135deg, #FF6B6B20, #FF6B6B10);
+            border-color: var(--color-1);
+        }
+        .group-2 .group-header { 
+            background: linear-gradient(135deg, #4ECDC420, #4ECDC410);
+            border-color: var(--color-2);
+        }
+        .group-3 .group-header { 
+            background: linear-gradient(135deg, #FFE66D30, #FFE66D15);
+            border-color: var(--color-3);
+        }
+        .group-4 .group-header { 
+            background: linear-gradient(135deg, #A8E6CF30, #A8E6CF15);
+            border-color: var(--color-4);
+        }
+
+        .group-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .member-count {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .members-list {
+            padding: 14px 18px;
+        }
+
+        .member {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #F7FAFC;
+        }
+
+        .member:last-child {
+            border-bottom: none;
+        }
+
+        .member-name {
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .badges {
+            display: flex;
+            gap: 4px;
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-pr {
+            background: #667EEA;
+            color: white;
+        }
+
+        .badge-sup {
+            background: #F56565;
+            color: white;
+        }
+
+        .badge-aux {
+            background: #48BB78;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .total-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667EEA, #764BA2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 400px) {
+            .header h1 {
+                font-size: 20px;
+            }
+            .member-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Grupos Co. Barrio Ruta del Sol</h1>
+        <div class="subtitle">Listado de Grupos Organizados</div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-title">Roles</div>
+        <div class="legend-items">
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #667EEA;"></div>
+                <span>PR - Precursor Regular</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #F56565;"></div>
+                <span>Sup - Superintendente</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #48BB78;"></div>
+                <span>Aux - Auxiliar</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Grupo 1 -->
+        <div class="group-card group-1">
+            <div class="group-header">
+                <div class="group-number">Grupo Nº 1</div>
+                <div class="member-count">16 personas</div>
+            </div>
+            <div class="members-list">
+                <div class="member">
+                    <div class="member-name">Bordoli Adrio</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Bordoli Elena</div>
+                    <div class="badges"><span class="badge badge-pr">PR</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Bordoli Ezequiel</div>
+                    <div class="badges"><span class="badge badge-sup">SUP</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Escalante Javier</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Escalante Natalia</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Falconi Armando</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Falconi Gabriela</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Humacata Guillermo</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Humacata Melisa</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Soria Roman</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Soria Sara</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Urzagaste Hilda</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Urzagaste Karen</div>
+                    <div class="badges"><span class="badge badge-pr">PR</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Urzagaste Natividad</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Urzagaste Nelson</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Zito Leonel</div>
+                    <div class="badges"><span class="badge badge-aux">AUX</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 2 -->
+        <div class="group-card group-2">
+            <div class="group-header">
+                <div class="group-number">Grupo Nº 2</div>
+                <div class="member-count">17 personas</div>
+            </div>
+            <div class="members-list">
+                <div class="member">
+                    <div class="member-name">Barrios Emanuel</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Barrios Irma</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Barrios Leandro</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Barrios Victor</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Lazarte Gaston</div>
+                    <div class="badges"><span class="badge badge-aux">AUX</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Lazarte Karen</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Leyes Zoe</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Rios Paula</div>
+                    <div class="badges"><span class="badge badge-pr">PR</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Silvero Romina</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Taboada Alejandra</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Taboada Gustavo</div>
+                    <div class="badges"><span class="badge badge-sup">SUP</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Torina Dolores</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Torres Erica</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Zito Ailen</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Zito Camila</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Zito Oswaldo</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Zito Veronica</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 3 -->
+        <div class="group-card group-3">
+            <div class="group-header">
+                <div class="group-number">Grupo Nº 3</div>
+                <div class="member-count">19 personas</div>
+            </div>
+            <div class="members-list">
+                <div class="member">
+                    <div class="member-name">Chincuini Jose</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Chincuini Karina</div>
+                    <div class="badges"><span class="badge badge-pr">PR</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Escobar Isabel</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Leguizamon Lucia</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Licera Elizabeth</div>
+                    <div class="badges"><span class="badge badge-pr">PR</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Licera Gustavo</div>
+                    <div class="badges"><span class="badge badge-aux">AUX</span><span class="badge badge-pr">PR</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Licera Julian</div>
+                    <div class="badges"><span class="badge badge-aux">AUX</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Lopez Teresa</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Melian Daniel</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Pellegran Aldo</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Retamar Brisa</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Retamar Nancy</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Reynoso Paola</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Salvatierra Delfina</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Salvatierra Febe</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Salvatierra Marcos</div>
+                    <div class="badges"><span class="badge badge-aux">AUX</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Salvatierra Vanina</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Strangio Ethel</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Strangio Sebastian</div>
+                    <div class="badges"><span class="badge badge-sup">SUP</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 4 -->
+        <div class="group-card group-4">
+            <div class="group-header">
+                <div class="group-number">Grupo Nº 4</div>
+                <div class="member-count">17 personas</div>
+            </div>
+            <div class="members-list">
+                <div class="member">
+                    <div class="member-name">Bernardelli Ayelen</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Bernardelli Juan</div>
+                    <div class="badges"><span class="badge badge-aux">AUX</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Cabral Cristian</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Cabral Rosa</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Campagnucci Agustina</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Campagnucci Pablo</div>
+                    <div class="badges"><span class="badge badge-sup">SUP</span></div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Conca Gabriel</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Garcia Azucena</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Garcia Daniel</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Ghiglione Heder</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Ghiglione Jairo</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Lencina Lucas</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Lezcano Cecilia</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Pellegrino Maria</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Sotelo Bianca</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Sotelo Elizabeth</div>
+                </div>
+                <div class="member">
+                    <div class="member-name">Sotelo Jorge</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="total-badge">Total: 69 publicadores</div>
+    </div>
+</body>
+</html>
